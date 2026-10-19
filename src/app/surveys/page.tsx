@@ -12,13 +12,7 @@ export const metadata: Metadata = {
   description: "墨爾本大學學生問卷的複製連結，以及用花中 6C 說法做的課堂快問。",
 }
 
-type PageProps = {
-  searchParams: Promise<{ c?: string }>
-}
-
-export default async function SurveysPage({ searchParams }: PageProps) {
-  const { c } = await searchParams
-
+export default function SurveysPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <PageIntro
@@ -75,7 +69,7 @@ export default async function SurveysPage({ searchParams }: PageProps) {
           句子用花中 6C 中英對照的中文，問的是「這個說法現在有多像我」。這不是墨爾本大學的正式問卷，沒有分數常模，也不會送出。勾選只留在這一頁，重新整理就會清掉。
         </p>
         <div className="mt-6">
-          <QuickCheck initialSlug={c} />
+          <QuickCheck />
         </div>
       </section>
     </div>

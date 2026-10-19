@@ -26,6 +26,8 @@ npm run dev
 
 開發伺服器預設在 [http://127.0.0.1:43123](http://127.0.0.1:43123)。
 
+推上 `main` 之後，GitHub Actions 會把靜態網站發佈到 [https://ponponmai-cmd.github.io/NPDL/](https://ponponmai-cmd.github.io/NPDL/)。這個網址跟倉庫一起留著，不會過期。
+
 ```bash
 npm run lint
 npm run build

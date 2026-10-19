@@ -9,13 +9,7 @@ export const metadata: Metadata = {
   description: "花蓮高中 NPDL 資源板上的歷年課程：旅遊英文、花蓮學，以及 2026 年的分享簡報。",
 }
 
-type PageProps = {
-  searchParams: Promise<{ year?: string }>
-}
-
-export default async function ArchivePage({ searchParams }: PageProps) {
-  const { year } = await searchParams
-
+export default function ArchivePage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <PageIntro
@@ -24,7 +18,7 @@ export default async function ArchivePage({ searchParams }: PageProps) {
         lede="這裡依學年整理花中 NPDL 資源板上的課程檔。簡報和 Word 仍在原來的貼文，按下去即可下載。深學工坊裡的課堂示例是另外寫的備課稿，不是這些檔案。"
       />
       <div className="mt-8">
-        <ArchiveBrowser initialYear={year} />
+        <ArchiveBrowser />
       </div>
 
       <aside className="mt-12 rounded-2xl bg-white p-6 ring-1 ring-foreground/10">

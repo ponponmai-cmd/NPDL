@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useSyncExternalStore } from "react"
 import { OutLink } from "@/components/out-link"
 import { Input } from "@/components/ui/input"
 import {
@@ -17,8 +17,15 @@ function isYear(value: string | undefined): value is ArchiveYear {
   return value === "2026" || value === "2023" || value === "2022" || value === "plans"
 }
 
-export function ArchiveBrowser({ initialYear }: { initialYear?: string }) {
-  const [year, setYear] = useState<ArchiveYear | "all">(isYear(initialYear) ? initialYear : "all")
+function yearFromWindow(): ArchiveYear | "all" {
+  const value = new URLSearchParams(window.location.search).get("year") ?? undefined
+  return isYear(value) ? value : "all"
+}
+
+export function ArchiveBrowser() {
+  const fromUrl = useSyncExternalStore(() => () => {}, yearFromWindow, () => "all" as const)
+  const [picked, setPicked] = useState<ArchiveYear | "all" | null>(null)
+  const year = picked ?? fromUrl
   const [query, setQuery] = useState("")
 
   const filtered = useMemo(() => {
@@ -50,7 +57,7 @@ export function ArchiveBrowser({ initialYear }: { initialYear?: string }) {
                 type="button"
                 role="radio"
                 aria-checked={selected}
-                onClick={() => setYear(option.id)}
+                onClick={() => setPicked(option.id)}
                 className={cn(
                   "rounded-full px-3 py-1.5 text-sm ring-1 ring-foreground/15",
                   selected ? "bg-primary text-primary-foreground" : "bg-white hover:bg-[#f3ecdf]",

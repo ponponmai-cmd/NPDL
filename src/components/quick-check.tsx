@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useSyncExternalStore } from "react"
 import { competencies, isCompetencySlug, type CompetencySlug } from "@/lib/competencies"
 import { schoolPhrases } from "@/lib/school"
 import { Button } from "@/components/ui/button"
@@ -13,9 +13,15 @@ const levels = [
   { value: 4, label: "這就是我" },
 ] as const
 
-export function QuickCheck({ initialSlug }: { initialSlug?: string }) {
-  const start: CompetencySlug = initialSlug && isCompetencySlug(initialSlug) ? initialSlug : "character"
-  const [slug, setSlug] = useState<CompetencySlug>(start)
+function slugFromWindow(): CompetencySlug {
+  const value = new URLSearchParams(window.location.search).get("c")
+  return value && isCompetencySlug(value) ? value : "character"
+}
+
+export function QuickCheck() {
+  const fromUrl = useSyncExternalStore(() => () => {}, slugFromWindow, () => "character" as const)
+  const [picked, setPicked] = useState<CompetencySlug | null>(null)
+  const slug = picked ?? fromUrl
   const [answers, setAnswers] = useState<Record<string, number>>({})
   const phrase = schoolPhrases[slug]
   const item = competencies.find((competency) => competency.slug === slug)
@@ -42,7 +48,7 @@ export function QuickCheck({ initialSlug }: { initialSlug?: string }) {
               type="button"
               role="tab"
               aria-selected={selected}
-              onClick={() => setSlug(competency.slug)}
+              onClick={() => setPicked(competency.slug)}
               className={cn(
                 "rounded-full px-3 py-1.5 text-sm ring-1 ring-foreground/15",
                 selected ? "bg-primary text-primary-foreground" : "bg-white hover:bg-[#f3ecdf]",
