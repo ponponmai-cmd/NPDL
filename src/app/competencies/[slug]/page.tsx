@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { competencies, getCompetency } from "@/lib/competencies"
+import { schoolPhrases, surveyFor } from "@/lib/school"
+import { OutLink } from "@/components/out-link"
 import { exemplars } from "@/lib/exemplars"
 import { gradeLabel } from "@/lib/drafts"
 import { CompetencyMark } from "@/components/competency-mark"
@@ -51,6 +53,47 @@ export default async function CompetencyPage({ params }: PageProps) {
       </div>
       <p className="mt-6 max-w-3xl text-lg leading-8">{item.question}</p>
       <p className="mt-3 max-w-3xl leading-8 text-muted-foreground">{item.summary}</p>
+
+      <section className="mt-8 rounded-2xl bg-white p-5 ring-1 ring-foreground/10 md:p-6">
+        <h2 className="font-heading text-2xl">花中使用的說法</h2>
+        <p className="mt-2 text-sm text-muted-foreground">{schoolPhrases[item.slug].docxTitle}</p>
+        {schoolPhrases[item.slug].note ? (
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">{schoolPhrases[item.slug].note}</p>
+        ) : null}
+        <div className="mt-4 grid gap-6 md:grid-cols-2">
+          <div>
+            <p className="text-sm font-medium">中文</p>
+            <ul className="mt-2 space-y-2 leading-7">
+              {schoolPhrases[item.slug].zh.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-sm font-medium">English</p>
+            <ul className="mt-2 space-y-2 leading-7 text-muted-foreground">
+              {schoolPhrases[item.slug].en.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <p className="mt-4 text-sm leading-7 text-muted-foreground">
+          中英兩欄依資源板上的對照分列。英文有時把兩句寫在同一行，所以兩邊的條數不一定相同。課程分享模板的勾選用詞接近這份，填表時以模板為準。
+        </p>
+        {surveyFor(item.slug) ? (
+          <div className="mt-4 flex flex-wrap gap-2">
+            <OutLink href={surveyFor(item.slug)!.zhCopy}>複製中文問卷</OutLink>
+            <OutLink href={surveyFor(item.slug)!.enCopy}>複製英文問卷</OutLink>
+            <Link
+              href={`/surveys?c=${item.slug}#check`}
+              className={buttonVariants({ variant: "outline", className: "h-9" })}
+            >
+              這一項的課堂快問
+            </Link>
+          </div>
+        ) : null}
+      </section>
 
       <div className="mt-8 grid gap-4 md:grid-cols-2">
         <section className="rounded-2xl bg-white p-5 ring-1 ring-foreground/10">

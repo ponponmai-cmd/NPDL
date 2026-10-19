@@ -63,7 +63,7 @@ export default function StartPage() {
       <PageIntro
         eyebrow="Getting started"
         title="從一個小組、一個單元開始"
-        lede="NPDL 談的是系統怎麼移動，但移動的第一個證據通常是兩位老師把同一堂課改深。下面的做法不需要新的委員會。"
+        lede="NPDL 談的是系統怎麼移動，但移動的第一個證據通常是兩位老師把同一堂課改深。花中已經放上資源板的願景對照、問卷、教案格式和歷年檔案，分別在願景、問卷、教案、歷年。下面的做法是小組怎麼開始改一堂課。"
       />
       <ol className="mt-10 space-y-3">
         {steps.map((step, index) => (

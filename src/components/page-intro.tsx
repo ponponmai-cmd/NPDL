@@ -1,3 +1,5 @@
+import type { ReactNode } from "react"
+
 export function PageIntro({
   eyebrow,
   title,
@@ -5,7 +7,7 @@ export function PageIntro({
 }: {
   eyebrow: string
   title: string
-  lede: string
+  lede: ReactNode
 }) {
   return (
     <div className="max-w-3xl">

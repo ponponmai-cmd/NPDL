@@ -15,11 +15,11 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: {
-    default: "深學工坊｜NPDL 深度學習設計",
-    template: "%s｜深學工坊",
+    default: "花蓮高中 NPDL｜深度學習資源",
+    template: "%s｜花蓮高中 NPDL",
   },
   description:
-    "給教師的 New Pedagogies for Deep Learning 設計工具。用六大全球素養與四個學習設計要素，寫一堂走得出教室的課。",
+    "國立花蓮高級中學的 New Pedagogies for Deep Learning 資源：六大素養與問卷、教案格式、歷年檔案，以及學校願景和學生圖像。",
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

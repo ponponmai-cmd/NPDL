@@ -1,17 +1,19 @@
-# 深學工坊
+# 花蓮高中 NPDL
 
-給教師用的 [New Pedagogies for Deep Learning](https://deep-learning.global/)（NPDL）設計網站。用六大全球素養和四個學習設計要素，把一堂課寫成可以存、可以改的備課稿。
+國立花蓮高級中學的 [New Pedagogies for Deep Learning](https://deep-learning.global/) 資源站。深度學習在這裡是教育框架，不是人工智慧的 deep learning。
 
-這裡的「深度學習」是教育框架，不是人工智慧的 deep learning。本站獨立製作，不是全球夥伴或臺灣 EDL 學校聯盟的官方網站。觀察點與學校自我檢查是備課用的簡化說法，正式量尺請以官方工具為準。
+站上整理的是花中已經公開的材料：
 
-## 可以做什麼
+- 六項素養的說明，以及花中資源板上的中英說法
+- 墨爾本大學學生問卷的複製連結，和一份只留在瀏覽器裡的課堂快問
+- 教案格式的下載入口（檔案本體在 [花中 NPDL 資源板](https://padlet.com/hualiangaozhong4/npdl-9z58bfhxc2zj038m)）
+- 歷年課程檔案目錄
+- 學校願景、學生圖像，以及和六項素養的備課對照
+- 《參與世界，改變世界》的短介。簡報和讀書會分享尚未放入
 
-- 讀六大素養、四個設計要素，以及一輪協作探究怎麼走
-- 看六堂課堂示例，並依年段、素養篩選
-- 在設計工坊寫自己的課：完成度檢查、存檔、複製摘要、下載文字檔
-- 做八題學校條件自我檢查
+設計工坊仍可用來寫自己的備課稿。稿子只存在這台瀏覽器的 localStorage。課堂示例是工坊撰寫的練習，不是花中教案。
 
-設計稿只存在這台瀏覽器的 localStorage，沒有帳號，也不會上傳。
+本站不是全球夥伴或臺灣 EDL 學校聯盟的官方網站。正式學習進程與墨爾本大學問卷請用原檔。願景和學生圖像以[校長室頁面](https://www.hlhs.hlc.edu.tw/principal/content?a=T0RESU1qWXlOVEl5TkRjPTJRRE96QWpOeGNsVGludGVseQ%3D%3D)和學校課程計畫為準。
 
 ## 本地執行
 
@@ -29,8 +31,3 @@ npm run lint
 npm run build
 npm start
 ```
-
-## 官方出處
-
-- [New Pedagogies for Deep Learning](https://deep-learning.global/)
-- [臺灣 NPDL 深度學習](https://www.npdl-tw.com/)

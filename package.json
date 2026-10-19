@@ -2,7 +2,7 @@
   "name": "shenxue-workshop",
   "version": "0.1.0",
   "private": true,
-  "description": "給教師的 NPDL 深度學習設計工坊",
+  "description": "國立花蓮高級中學的 NPDL 深度學習資源站，含備課用的深學工坊。",
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 43123",
     "build": "next build",
