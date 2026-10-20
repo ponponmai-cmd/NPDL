@@ -118,13 +118,13 @@ export function StudioApp() {
 
   function startSample() {
     if (!guardDirty()) return
-    const next = draftFromExemplar("harbor-plastic")
+    const next = draftFromExemplar("travel-english")
     if (!next) return
     setStudio((current) => ({
       ...current,
       draft: next,
       savedJson: JSON.stringify(next),
-      queryNote: "已載入示例。存檔之後才會留在左側清單。",
+      queryNote: "已載入旅遊英文。存檔之後才會留在左側清單。",
     }))
     setTitleError(null)
     setSavedMessage(null)
@@ -219,7 +219,7 @@ export function StudioApp() {
         <p className="text-sm font-medium text-primary">設計工坊</p>
         <h1 className="mt-2 font-heading text-4xl leading-tight md:text-5xl">這台瀏覽器還沒有設計</h1>
         <p className="mt-4 text-lg leading-8 text-muted-foreground">
-          設計只存在這台裝置，不會上傳。你可以從空白開始，或先載入一堂海岸垃圾的示例，看一份填完的稿長什麼樣子。
+          設計只存在這台裝置，不會上傳。你可以從空白開始，或先載入花中的旅遊英文，看一份帶入素養的稿長什麼樣子。
         </p>
         {storageNote ? (
           <p className="mt-4 rounded-lg bg-white px-3 py-2 text-sm leading-6 ring-1 ring-foreground/10" role="alert">
@@ -232,7 +232,7 @@ export function StudioApp() {
             從空白開始
           </Button>
           <Button type="button" variant="outline" className="h-11 px-4" onClick={startSample}>
-            載入港邊示例
+            載入旅遊英文
           </Button>
         </div>
       </div>
@@ -320,7 +320,7 @@ function StudioEditor({
             新增
           </Button>
           <Button type="button" size="sm" variant="outline" onClick={onSample}>
-            載入示例
+            載入旅遊英文
           </Button>
         </div>
         {drafts.length === 0 ? (
@@ -378,7 +378,7 @@ function StudioEditor({
               id="draft-title"
               value={draft.title}
               onChange={(event) => onUpdate({ title: event.target.value })}
-              placeholder="例如：港邊的塑膠瓶要去哪裡"
+              placeholder="例如：旅遊英文"
               className="mt-2 h-11"
               aria-invalid={titleError ? true : undefined}
               aria-describedby={titleError ? "draft-title-error" : undefined}
@@ -420,7 +420,7 @@ function StudioEditor({
               id="draft-subject"
               value={draft.subject}
               onChange={(event) => onUpdate({ subject: event.target.value })}
-              placeholder="例如：地理、公民"
+              placeholder="例如：高三英文"
               className="mt-2 h-10"
             />
           </div>
@@ -430,7 +430,7 @@ function StudioEditor({
             hint="寫成一個校外的人也在意的問題，而不是「完成第幾課」。"
             value={draft.issue}
             onChange={(issue) => onUpdate({ issue })}
-            placeholder="這一帶的塑膠瓶從哪裡來？區公所接下來一個月可以做哪一件小而具體的事？"
+            placeholder="這次要讓學生對誰、用什麼方式把話說清楚？"
           />
           <Field
             id="draft-learners"
@@ -438,7 +438,7 @@ function StudioEditor({
             hint="這班現在會什麼、卡在哪。不要寫成你希望他們成為的樣子。"
             value={draft.learners}
             onChange={(learners) => onUpdate({ learners })}
-            placeholder="高一。多數人會說做好回收，但分不清清潔隊、攤販和漁船各自的說法。"
+            placeholder="高三。想練口語、聽不同口音，但還常把這門課當成考試英文。"
           />
         </section>
 
@@ -481,7 +481,7 @@ function StudioEditor({
             hint="誰在任務中途就參與？學生、教師、家人、社區裡的誰？"
             value={draft.partnerships}
             onChange={(partnerships) => onUpdate({ partnerships })}
-            placeholder="清潔隊與回收場在第三節受訪。區公所承辦人答應看十頁以內的簡報。"
+            placeholder="外籍大學生來看簡報。青旅、攀岩教練和部落的人在現場。"
           />
           <Field
             id="draft-environment"
@@ -489,7 +489,7 @@ function StudioEditor({
             hint="怎樣的空間與氣氛，讓未完成的想法可以被看見？"
             value={draft.environment}
             onChange={(environment) => onUpdate({ environment })}
-            placeholder="未完成的地圖貼在走廊，其他班級可以加註他們看到的瓶子。"
+            placeholder="簡報對準外籍大學生。踏查放在部落，英文要用在現場。"
           />
           <Field
             id="draft-pedagogy"
@@ -497,7 +497,7 @@ function StudioEditor({
             hint="哪一個教學動作是為了那一兩項素養？"
             value={draft.pedagogy}
             onChange={(pedagogy) => onUpdate({ pedagogy })}
-            placeholder="學生先寫假設，再把兩種互相矛盾的說法並排，不能平均成一句正確答案。"
+            placeholder="學生依受眾調整說法，報告後聽回饋，再改自己怎麼講。"
           />
           <Field
             id="draft-digital"
@@ -505,7 +505,7 @@ function StudioEditor({
             hint="這個工具是在放大、加速，還是把人連起來？拿掉它會少掉什麼？"
             value={draft.digital}
             onChange={(digital) => onUpdate({ digital })}
-            placeholder="共用地圖用來比較地點。簡報只服務區公所，頁數被限制。"
+            placeholder="簡報用來對準受眾。拿掉投影片，口語練習還在。"
           />
         </section>
 
@@ -517,7 +517,7 @@ function StudioEditor({
             hint="寫看得到的行為。避免「參與熱絡」「態度良好」。"
             value={draft.evidence}
             onChange={(evidence) => onUpdate({ evidence })}
-            placeholder="簡報能指出建議忽略了誰。小組能並排兩份矛盾說法，並寫出還缺的證據。"
+            placeholder="學生能指出自己在溝通上要改的地方，並依別人的建議調整說法。"
           />
           <Field
             id="draft-revision"
@@ -525,7 +525,7 @@ function StudioEditor({
             hint="探究的最後一步。只寫一個教學動作，不列入完成度。"
             value={draft.revision}
             onChange={(revision) => onUpdate({ revision })}
-            placeholder="下次把淨灘收成二十分鐘，把時間留給說法為什麼不一樣。"
+            placeholder="下次施測前，讓學生把溝通力的自評說得更具體。"
           />
           <div className="flex flex-wrap items-center gap-3">
             <Button type="submit" className="h-11 px-4">

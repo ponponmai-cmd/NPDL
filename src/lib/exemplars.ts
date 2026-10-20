@@ -1,233 +1,236 @@
 import type { CompetencySlug } from "@/lib/competencies"
-import type { GradeBand } from "@/lib/drafts"
+
+export type CompetencyMarking = {
+  slug: CompetencySlug
+  note: string
+}
+
+export type ExemplarLink = {
+  label: string
+  wishId: string
+}
 
 export type Exemplar = {
   slug: string
   title: string
-  grade: GradeBand
+  year: "2026" | "2023" | "2022"
+  yearLabel: string
+  people: string
   subjects: string
-  sessions: string
-  competencies: CompetencySlug[]
   summary: string
-  context: string
-  learners: string
-  issue: string
-  partnerships: string
-  environment: string
-  pedagogy: string
-  digital: string
-  evidence: string
-  revision: string
-  arc: { title: string; detail: string }[]
-  pitfall: string
+  current: CompetencyMarking[]
+  next: CompetencyMarking
+  links: ExemplarLink[]
 }
 
 export const exemplars: Exemplar[] = [
   {
-    slug: "harbor-plastic",
-    title: "港邊的塑膠瓶要去哪裡",
-    grade: "hs",
-    subjects: "地理、公民",
-    sessions: "六節",
-    competencies: ["citizenship", "critical"],
-    summary:
-      "學生沿著一條真實海岸，追蹤塑膠從攤販、漁船到回收場的路徑，最後交出一份區公所能用的簡報。",
-    context:
-      "學校距漁港約十五分鐘。學生常經過海岸，卻很少說得出垃圾從哪裡來、誰在收、誰被影響。",
-    learners:
-      "高一。多數人會說「做好回收」，但分不清清潔隊、攤販和漁船各自的說法。小組報告經驗多，訪問陌生人的經驗少。",
-    issue: "這一帶的塑膠瓶從哪裡來？區公所接下來一個月可以做哪一件小而具體的事？",
-    partnerships:
-      "港區清潔隊、一位願意受訪的漁民、回收場現場人員。教師先拜訪，學生再以小組提問。區公所承辦人答應看十頁以內的簡報。",
-    environment:
-      "前兩節在教室建立問題。第三節走出校園。之後改成小組桌與線上共編。未完成的地圖貼在走廊，邀請其他班級加註他們看到的瓶子。",
-    pedagogy:
-      "學生先寫假設，再被現場說法打臉。教師不先給流程圖，要求每一個主張都附上來路。中途安排一次「矛盾並排」：兩種說法不能被平均成一句正確答案。",
-    digital:
-      "共用地圖標註照片與座標，用來比較地點而不是做漂亮報告。簡報只服務區公所，頁數被限制，逼學生挑證據。",
-    evidence:
-      "簡報裡能指出建議會影響到誰、忽略了誰；小組能並排兩份互相矛盾的說法，並寫出還缺的證據。",
-    revision: "下次把淨灘收成二十分鐘，把主要時間留給「說法為什麼不一樣」。",
-    arc: [
-      { title: "寫下假設", detail: "用一張海岸照片寫三個假設，並標出哪一句只是猜的。" },
-      { title: "設計訪談", detail: "寫問題、預演，並刪掉問不出新資訊的句子。" },
-      { title: "走察", detail: "到港邊與回收場，記錄說法、地點和還沒問到的人。" },
-      { title: "並排矛盾", detail: "把不一致的說法放在一起，決定要補哪一種證據。" },
-      { title: "寫給區公所", detail: "只留三項建議，每項都要小到一個月內做得到。" },
-      { title: "聽回饋再改", detail: "校內評審扮演承辦人，學生依提問改一版。" },
+    slug: "sdgs-2026",
+    title: "SDGs 行動不 NG",
+    year: "2026",
+    yearLabel: "2026",
+    people: "黃怡婷、麥芃芃",
+    subjects: "高二多元選修 · 國文、英文",
+    summary: "跨科選修。學生認識永續發展目標，做探究報告、雙語徽章和海報，也用 See-Think-Wonder 與 ORID 整理想法。",
+    current: [
+      {
+        slug: "critical",
+        note: "簡報把批判思考寫進課程目標，期末問卷用 22 題看思辨。教師反思寫到：學生多半還在照格式填，工具本身還不等於想得更深。",
+      },
+      {
+        slug: "citizenship",
+        note: "同一頁課程目標寫了公民素養。任務放在 SDGs 與校園生活的連結，也有一份公民素養問卷。",
+      },
+      {
+        slug: "communication",
+        note: "課程目標同時寫了溝通。雙語海報、徽章和上台分享，都要把永續議題說給別人聽。",
+      },
     ],
-    pitfall:
-      "很容易變成淨灘日。撿垃圾可以是行動的一小段，但這次要練的是看懂系統，並提出能被檢驗的建議。",
+    next: {
+      slug: "collaboration",
+      note: "跨科備課、小組桌遊、手冊和海報都已經在發生，課程目標還沒有把協作列成全球素養。下一步可以把「誰貢獻了什麼、意見不同時怎麼處理」設計成要留下的證據。教師反思另寫了走出教室做淨灘或志工，那是把已經列上的公民素養做深。",
+    },
+    links: [{ label: "開啟簡報", wishId: "e9YpQNpzlyO1WxjM" }],
   },
   {
-    slug: "market-voices",
-    title: "市場裡的聲音",
-    grade: "ms",
-    subjects: "國文",
-    sessions: "五節",
-    competencies: ["communication", "character"],
-    summary:
-      "學生到傳統市場錄下攤商的一段工作日常，做成給新搬來居民的聆聽指南。",
-    context:
-      "市場就在校門口對面。國二學生幾乎每天經過，卻說不出三個攤位在賣什麼、老闆怎麼決定一天的開始。",
-    learners:
-      "國二。口語表達活潑，寫作偏愛漂亮的形容詞。很少為了一個真實聽眾刪句子。對「打擾攤商」有點不好意思。",
-    issue: "新搬來這個社區的人，怎樣用十五分鐘聽懂這座市場怎麼運作？",
-    partnerships:
-      "市場自治會先同意三個攤位。攤商是受訪者，也是第一批聽眾：指南念給他們聽，他們可以要求刪掉不正確的話。",
-    environment:
-      "教室用來預演怎麼開口、怎麼停。錄音在市場，整理時學生分散到圖書館角落，避免互相覆蓋。走廊貼出「還不能播」的版本，邀請其他班級寫聽不懂的地方。",
-    pedagogy:
-      "先練聽。學生要交的第一份作業不是稿子，而是「我以為他會說，結果他說了」的對照。形容詞被限制，每段錄音只留一個細節。",
-    digital:
-      "手機錄音加上一份共同的時間軸。數位用在反覆聽和讓攤商遠端點選要刪的句子，而不是做特效。",
-    evidence:
-      "指南的開頭會告訴聽的人這段話準備給誰。學生能說出自己刪掉了哪一句、為什麼。攤商點頭或要求修改的地方被留下來。",
-    revision: "下次預演要加入「對方正在忙」的版本，學生上次太容易在安靜教室裡把話問完。",
-    arc: [
-      { title: "市場五分鐘", detail: "只觀察，不訪問，寫下三件自己不確定的事。" },
-      { title: "開口預演", detail: "練習自我介紹、被拒絕，以及把問題改短。" },
-      { title: "錄音", detail: "每個攤位只問一個主問題，留下環境聲。" },
-      { title: "刪到能聽", detail: "為新居民剪成十五分鐘，並註明哪裡是攤商的原話。" },
-      { title: "還給攤商", detail: "播給受訪者聽，依他們的要求改一版。" },
+    slug: "i-see-you",
+    title: "I see you",
+    year: "2026",
+    yearLabel: "2026",
+    people: "謝璦羽",
+    subjects: "高三英文",
+    summary: "全英語課。學生看自己的情緒狀態，用 ORID 談壓力，也做關懷與互助的情境。",
+    current: [
+      {
+        slug: "collaboration",
+        note: "封面寫的是 NPDL 協作。設計段落把關懷、互助和小組討論放在一起。",
+      },
     ],
-    pitfall: "不要把攤商寫成勵志故事。這次練的是聽得準、說得對人，而不是把別人的生活寫得很美。",
+    next: {
+      slug: "character",
+      note: "課裡已有情緒自我檢視和身體訊號，這比較靠近品格裡的自我覺察。封面沒有把品格設成主軸。下一步可以讓「學生說得出自己現在的狀態、以及下一步怎麼調整」成為證據，而不只看小組有沒有一起完成。",
+    },
+    links: [{ label: "開啟簡報", wishId: "dMA1W85x1jkAa4OV" }],
   },
   {
-    slug: "classroom-power",
-    title: "這間教室的電費",
-    grade: "es-high",
-    subjects: "自然",
-    sessions: "四節，加一個月觀察",
-    competencies: ["critical", "collaboration"],
-    summary:
-      "五年級審計自己教室的用電，設計一個全班做得到的一個月實驗，並向總務處說明結果。",
-    context:
-      "學校正在換燈具。總務處願意提供這一棟樓的電費趨勢，但不希望學生只寫「要隨手關燈」。",
-    learners:
-      "五年級。會讀簡單圖表，小組常由固定的人做主。對「省電」有口號，很少能量到自己這間教室。",
-    issue: "如果全班只改一件跟電有關的習慣，一個月後我們看得出差異嗎？",
-    partnerships:
-      "總務處提供電表讀法和不能碰的安全界線。隔壁班當對照，不一定要做一樣的事，但答應一起讀數。",
-    environment:
-      "實驗規則貼在開關旁邊，而不是只寫在學習單。每週五最後十分鐘是全班讀數，不佔用另一節課。",
-    pedagogy:
-      "先猜哪一項最耗電，再被實際讀數修正。小組必須一起決定「只改一件事」，意見不同時用投票加一句反對意見保留。",
-    digital:
-      "用表格把四週讀數畫成圖。圖是拿來跟總務處說話的，不是交作業。學生要能不用稿子解釋圖上的一個轉折。",
-    evidence:
-      "學生分得出「我們改了習慣」和「這個月天氣不一樣」這兩種解釋。小組的反對意見被寫進給總務處的說明。",
-    revision: "讀數如果只由一位學生負責，協作會假掉。下次改成兩人一組輪值，並把輪值表公開。",
-    arc: [
-      { title: "先猜", detail: "列出教室裡所有用電的東西，猜前三名。" },
-      { title: "學會讀", detail: "總務處示範安全讀表，學生練習記錄。" },
-      { title: "只改一件", detail: "全班決定實驗項目，並寫下怎麼知道有沒有效。" },
-      { title: "一個月後", detail: "比較圖表，向總務處說明可以繼續或該停下的理由。" },
+    slug: "international-2026",
+    title: "國際教育",
+    year: "2026",
+    yearLabel: "2026",
+    people: "黃燕靜、麥芃芃、楊鵬耀",
+    subjects: "高一 · 彈性時間 · 國際教育",
+    summary: "和美國阿布奎基高校做短影音與視訊。學生用 Canva 介紹台灣與花蓮，並完成約一分鐘的全英影片。",
+    current: [
+      {
+        slug: "communication",
+        note: "前後測都在量溝通力。活動是看對方的影片、做給對方的簡報，再依回饋改自己的短片。",
+      },
     ],
-    pitfall: "不要擴成全校節電競賽。範圍一大，學生就回到口號。這間教室、一件事、一個月，就夠了。",
+    next: {
+      slug: "citizenship",
+      note: "學生在向另一個國家介紹自己的生活。下一步可以加上：這支影片讓對方看見誰、漏掉誰，而不只看英文有沒有說清楚。",
+    },
+    links: [{ label: "開啟簡報", wishId: "zV61Q6xk14EEWO98" }],
   },
   {
-    slug: "corner-for-next",
-    title: "給未來同學的街角",
-    grade: "hs",
-    subjects: "美術、公民",
-    sessions: "六節",
-    competencies: ["creativity", "citizenship"],
-    summary:
-      "學生為放學必經的一個街角提出可試做的小改變，先做模型給里長和店家試反應。",
-    context:
-      "校門口轉角沒有遮蔽，下雨天家長接送和店家動線互相擋住。抱怨很多，具體提案很少。",
-    learners:
-      "高二選修。美術組想做裝置，公民組想寫陳情。兩邊都不習慣先問使用這個街角的人。",
-    issue: "這個轉角下一個雨季前，可以先試哪一種不需工程的改變？",
-    partnerships:
-      "轉角雜貨店、兩位固定接送的家長、里長辦公室。他們在第三節就來看模型，而不是等發表會。",
-    environment:
-      "模型放在走廊，貼上「請寫下你會被擋到的地方」。教室討論只在收集到這些句子之後才開始。",
-    pedagogy:
-      "限制很明確：兩週內、不施工、不增加店家負擔。點子必須做成 1:20 模型或一場十五分鐘的現場試驗。",
-    digital:
-      "用縮時攝影記錄下雨天的動線，當作設計依據。攝影不是作品本身，模型或試驗才是。",
-    evidence:
-      "提案寫得出為誰而改、誰可能因此更不方便。試用後的第二版和第一版明顯不同，而且學生說得出改了哪裡。",
-    revision: "美術和公民不要各做各的再合併。下次從同一組照片開始，強迫兩個專長在第一節就一起決定限制。",
-    arc: [
-      { title: "看動線", detail: "雨天觀察十五分鐘，只記錄停下、避開、抱怨的位置。" },
-      { title: "寫限制", detail: "和店家確認什麼絕對不能做。" },
-      { title: "第一版", detail: "做出模型或一場小試驗。" },
-      { title: "被打臉", detail: "請使用這個街角的人指出行不通的地方。" },
-      { title: "第二版", detail: "只改一個被指出的問題，並說明為什麼。" },
+    slug: "running-2026",
+    title: "不只會考試，更要會跑步",
+    year: "2026",
+    yearLabel: "2026",
+    people: "鄭雅方、邱培杰",
+    subjects: "健康促進",
+    summary: "健康體位。學生定期量測、做飲食與運動選擇，並寫挫折之後怎麼再開始的反思。",
+    current: [
+      {
+        slug: "character",
+        note: "評估頁寫品格：身心韌性與自我管理。質性證據是中期量測後的「挫折與修復」反思。",
+      },
+      {
+        slug: "citizenship",
+        note: "同一頁寫公民素養：從照顧自己，走到班級一起維持運動習慣。",
+      },
     ],
-    pitfall: "漂亮的模型如果沒有人試過，就還不是這次要的創造力。里長的讚美也不能取代店家的真實反應。",
+    next: {
+      slug: "critical",
+      note: "課裡已經有體位數字和飲食紀錄。下一步可以要學生說明哪一筆數字支持結論、哪一筆只是打卡，把批判思考設成要看的證據。",
+    },
+    links: [{ label: "開啟簡報", wishId: "Xb8YaLpwlylBayn1" }],
   },
   {
-    slug: "how-we-argue",
-    title: "我們怎麼好好吵",
-    grade: "ms",
-    subjects: "綜合活動",
-    sessions: "四節",
-    competencies: ["collaboration", "communication"],
-    summary:
-      "學生拿校園裡一個正在發生的小衝突，設計一場讓雙方都說得完的討論，並留下下次用得上的規則。",
-    context:
-      "社團時間和補救教學搶同一間教室，已經吵了三週。導師們各自安撫，學生沒有正式談過。",
-    learners:
-      "國三。很會站邊，不習慣把對方的話重說一次再回應。小組領導常常是音量最大的人。",
-    issue: "這間教室下個月怎麼共用，才能讓兩個需求都被說完？",
-    partnerships:
-      "社團老師和補救教學老師答應各出一人，在第三節聽學生主持的二十分鐘，並只回應規則可不可行。",
-    environment:
-      "討論不在當事人最常吵架的那間教室，改到圖書館圓桌。規則先貼出來：一次一個人說話，回應前先重述。",
-    pedagogy:
-      "學生先分別訪談雙方，不能只訪自己站的那一邊。主持稿要寫出「如果冷場」和「如果變大聲」兩種做法。",
-    digital:
-      "把雙方原話做成對照表，投影在討論時，避免後來變成「我沒有那樣說」。錄音只給參與者覆核，不公開。",
-    evidence:
-      "規則裡看得到雙方的原話。主持人在衝突升高時有用上預先寫好的句子。最後的共用方式寫出誰要放棄什麼。",
-    revision: "下次訪談題目要更短。這次學生問太廣，把舊帳都翻出來，討論差點離題。",
-    arc: [
-      { title: "寫出衝突", detail: "用五句話描述發生了什麼，不能出現罵人的標籤。" },
-      { title: "兩邊都問", detail: "每組必須帶回雙方各三段原話。" },
-      { title: "設計主持", detail: "寫開場、重述、暫停的句子，並先角色扮演。" },
-      { title: "真的談", detail: "二十分鐘討論，結束時留下一條兩週試用的規則。" },
+    slug: "hualien-tech",
+    title: "花蓮學（新興科技）",
+    year: "2026",
+    yearLabel: "2026",
+    people: "黃楨喻、林佩琪",
+    subjects: "資訊、家政 · 花蓮學",
+    summary: "認識原住民野菜與在地食材，用 Google Lens 辨識，也用 AI 產生食譜再實際烹調。",
+    current: [
+      {
+        slug: "collaboration",
+        note: "評估頁勾了協作。後測寫協作向度有進步，學生描述依專長分工、處理組內衝突。",
+      },
+      {
+        slug: "communication",
+        note: "同一頁也勾了溝通。學生要口頭分享，並在採買前用群組把事情說定。",
+      },
     ],
-    pitfall: "教師不要在學生還沒重述對方之前就給出「公平方案」。那會把協作收回成成人仲裁。",
+    next: {
+      slug: "critical",
+      note: "教師在未來方向裡寫了：比較 AI 生成食譜和傳統食譜的差異，培養批判性思考。這項還沒勾進這次的全球素養。",
+    },
+    links: [{ label: "開啟簡報", wishId: "lDK1ZRLodkGYaJ9z" }],
   },
   {
-    slug: "recipe-lab",
-    title: "長輩的食譜實驗室",
-    grade: "es-high",
-    subjects: "國語、健體",
-    sessions: "五節",
-    competencies: ["creativity", "character"],
-    summary:
-      "三年級和社區長輩一起把一道家常菜改成同學吃得下的版本，並做成圖解食譜。",
-    context:
-      "學校午餐常有學生因為口味或飲食需求吃很少。社區關懷據點的長輩每週來一次說故事，過去只是表演。",
-    learners:
-      "三年級。喜歡動手，寫字還不穩。容易把「創意」理解成加很多配料。需要成人在廚房安全上設界線。",
-    issue: "哪一道長輩的菜，可以改到我們班有飲食需求的同學也吃得下，而且長輩仍認得那是原來的菜？",
-    partnerships:
-      "兩位據點長輩、營養午餐廚房、班上一位同學的家長說明飲食需求。長輩是共同設計的人，不是被訪問的資料。",
-    environment:
-      "試吃在教室後側的小組桌，不辦成園遊會。失敗的版本留在桌上，貼「這次太鹹」這類短句，讓下一組看得到。",
-    pedagogy:
-      "每次只准改一個條件：鹽、形狀或取代的食材。學生要用圖把步驟畫出來，並問長輩「這還是你的菜嗎」。",
-    digital:
-      "用平板拍下每一步，做成可以放大圖示的食譜。圖是給下一班看的，所以文字要短到三年級讀得懂。",
-    evidence:
-      "第二版只改了一個條件，學生說得出為什麼。長輩點出「這還是我的菜」或「這已經不是了」。有飲食需求的同學願意再試一口。",
-    revision: "廚房安全講解上次太長，學生開始玩。下次改成現場只設三個不能碰的東西，其餘邊做邊提醒。",
-    arc: [
-      { title: "選一道菜", detail: "長輩帶一道菜，學生說出班上誰可能吃不下、為什麼。" },
-      { title: "只改一樣", detail: "決定鹽、形狀或食材，三選一。" },
-      { title: "做第一版", detail: "圖解步驟，留下失敗的味道紀錄。" },
-      { title: "問長輩", detail: "請長輩判斷這還是不是原來的菜。" },
-      { title: "留給下一班", detail: "把圖解食譜改到同學讀得懂，並註明不能改的那一步。" },
+    slug: "first-aid",
+    title: "大傷分類 Go",
+    year: "2026",
+    yearLabel: "2026",
+    people: "黃雅蕾",
+    subjects: "健康與護理 · 基礎急救",
+    summary: "基礎急救。學生依技術熟練度和體力分工，在模擬情況裡互相協調。",
+    current: [
+      {
+        slug: "collaboration",
+        note: "簡報標題就是協作素養的前後測。學生把「做報告的分工」說成「急救現場的分工」。",
+      },
     ],
-    pitfall: "不要辦成孝親園遊會。這次要練的是在限制裡改一道菜，並對長輩和同學的需求負責。",
+    next: {
+      slug: "communication",
+      note: "後測裡人際與溝通是成長明顯的一塊，下一步也寫了衝突時怎麼安撫。可以把「在當下把話講清楚」設計成溝通的證據，而不只看工作有沒有分完。",
+    },
+    links: [{ label: "開啟簡報", wishId: "wKmOZ57EvB2VazMA" }],
+  },
+  {
+    slug: "ocean",
+    title: "搶救海洋大作戰",
+    year: "2026",
+    yearLabel: "2026",
+    people: "黃雅蕾",
+    subjects: "高三 · 部定必修",
+    summary: "認識台灣海洋環境、賞鯨規範和海廢再利用，也學戶外活動的風險判斷。檔案實施時間寫 112 學年度第二學期。",
+    current: [
+      {
+        slug: "citizenship",
+        note: "評估頁把全球視野、平等與福祉、永續和解決複雜問題放在 NPDL 全球素養。活動包含賞鯨規範、海廢藝術，以及把保育講給別人聽。",
+      },
+    ],
+    next: {
+      slug: "critical",
+      note: "課裡用 Windy 和 AI 看天氣、做安全決定。下一步可以要學生寫出採用了哪一則資訊、放下了哪一則，把這段設計成批判思考。",
+    },
+    links: [{ label: "開啟 PDF", wishId: "R7dXadN4bkoeZ6bl" }],
+  },
+  {
+    slug: "hualien-study",
+    title: "花蓮學",
+    year: "2023",
+    yearLabel: "2023 整理",
+    people: "黃燕靜、麥芃芃、楊鵬耀",
+    subjects: "高一校訂必修 · 藝術、音樂、英詩",
+    summary: "自 2020 年起的高一校訂必修。學生分組寫英文詩、拍照，並做英語簡報。",
+    current: [
+      {
+        slug: "collaboration",
+        note: "課程分享把協作的向度全部勾起。成功標準、前後測和教師省思都在看小組能不能一起完成詩和簡報。",
+      },
+    ],
+    next: {
+      slug: "communication",
+      note: "溝通的格子沒有勾，但學生要做英語簡報、給同儕回饋，也到郭子究音樂故居口頭報告。教師寫下一次會多看寫作。下一步可以把「這份作品是說給誰聽的」設成主軸。",
+    },
+    links: [{ label: "開啟 Word", wishId: "wKmOZ57bdkx0azMA" }],
+  },
+  {
+    slug: "travel-english",
+    title: "旅遊英文",
+    year: "2022",
+    yearLabel: "2022／110 學年第二學期",
+    people: "謝璦羽、麥芃芃",
+    subjects: "高三多元選修 · 英文",
+    summary: "學生用英語對外籍大學生簡報，訪青年旅社，一起攀岩，並到太魯閣族支亞干部落踏查。",
+    current: [
+      {
+        slug: "communication",
+        note: "摘要寫課程主要著重溝通，關鍵詞是溝通力。分享模板把溝通的向度都勾了。簡報對準：依受眾設計、事後反思、用英文表達自己的文化。",
+      },
+    ],
+    next: {
+      slug: "citizenship",
+      note: "青旅、攀岩教練和支亞干部落已經在課裡，公民素養的格子沒有勾。下一步可以把踏查從「用英文介紹」設計成「我們要為這個社區的誰，提出一件做得到的事」。",
+    },
+    links: [
+      { label: "課程分享 Word", wishId: "yEPVZko59J3pZb0Y" },
+      { label: "110 學年第二學期簡報", wishId: "R7dXadN4bnPjZ6bl" },
+    ],
   },
 ]
+
+export const exemplarYears = [
+  { id: "all", label: "全部學年" },
+  { id: "2026", label: "2026" },
+  { id: "2023", label: "2023" },
+  { id: "2022", label: "2022" },
+] as const
 
 export function getExemplar(slug: string) {
   return exemplars.find((item) => item.slug === slug)

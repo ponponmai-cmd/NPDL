@@ -15,7 +15,7 @@ export default function InquiryPage() {
       <PageIntro
         eyebrow="Collaborative inquiry"
         title="一輪探究，比一場研習有用"
-        lede="NPDL 的學校不是收集教案，而是一起設計、看學生怎麼變、再把設計改掉。下面五步是深學工坊用來備課的走法，用同一堂港邊的課當例子。它不是官方協議的逐字版本。"
+        lede="NPDL 的學校一起設計、看學生怎麼變、再把設計改掉。下面五步用花中的旅遊英文走一遍，句子依那份課程分享整理，不是官方協議的逐字版本。"
       />
       <div className="mt-10">
         <InquiryWalk />

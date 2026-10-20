@@ -15,7 +15,7 @@ export default function ArchivePage() {
       <PageIntro
         eyebrow="Archive"
         title="花蓮高中放上資源板的課"
-        lede="這裡依學年整理花中 NPDL 資源板上的課程檔。簡報和 Word 仍在原來的貼文，按下去即可下載。深學工坊裡的課堂示例是另外寫的備課稿，不是這些檔案。"
+        lede="這裡依學年整理花中 NPDL 資源板上的課程檔。簡報和 Word 仍在原來的貼文，按下去即可下載。每堂課也標了已經對上的全球素養，以及下一步可以設計的那一項。"
       />
       <div className="mt-8">
         <ArchiveBrowser />

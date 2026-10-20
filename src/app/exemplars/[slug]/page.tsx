@@ -2,8 +2,9 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { exemplars, getExemplar } from "@/lib/exemplars"
-import { gradeLabel } from "@/lib/drafts"
+import { wishUrl } from "@/lib/school"
 import { CompetencyChip } from "@/components/competency-mark"
+import { OutLink } from "@/components/out-link"
 import { buttonVariants } from "@/components/ui/button"
 
 type PageProps = {
@@ -17,97 +18,75 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const item = getExemplar(slug)
-  if (!item) return { title: "找不到示例" }
+  if (!item) return { title: "找不到教案" }
   return { title: item.title, description: item.summary }
 }
-
-const blocks = [
-  { key: "partnerships", label: "學習夥伴" },
-  { key: "environment", label: "學習環境" },
-  { key: "pedagogy", label: "教學實踐" },
-  { key: "digital", label: "善用數位" },
-] as const
 
 export default async function ExemplarPage({ params }: PageProps) {
   const { slug } = await params
   const item = getExemplar(slug)
   if (!item) notFound()
 
+  const index = exemplars.findIndex((exemplar) => exemplar.slug === item.slug)
+  const previous = exemplars[(index + exemplars.length - 1) % exemplars.length]
+  const next = exemplars[(index + 1) % exemplars.length]
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <p className="text-sm text-muted-foreground">
         <Link href="/exemplars" className="hover:text-foreground">
-          課堂示例
+          花中課程示例
         </Link>
       </p>
       <p className="mt-4 text-sm text-primary">
-        {gradeLabel(item.grade)} · {item.subjects} · {item.sessions}
+        {item.yearLabel} · {item.subjects}
       </p>
       <h1 className="mt-2 max-w-3xl font-heading text-4xl leading-tight md:text-5xl">{item.title}</h1>
+      <p className="mt-2 text-muted-foreground">{item.people}</p>
       <p className="mt-4 max-w-3xl text-lg leading-8">{item.summary}</p>
       <div className="mt-4 flex flex-wrap gap-2">
-        {item.competencies.map((competency) => (
-          <CompetencyChip key={competency} slug={competency} />
-        ))}
-      </div>
-      <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
-        這是深學工坊寫的備課示例，用來示範設計語言。它不是官方範例，也不是某一所學校的課堂紀錄。
-      </p>
-
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
-        <section className="rounded-2xl bg-white p-5 ring-1 ring-foreground/10">
-          <h2 className="font-heading text-2xl">情境</h2>
-          <p className="mt-3 leading-7">{item.context}</p>
-        </section>
-        <section className="rounded-2xl bg-white p-5 ring-1 ring-foreground/10">
-          <h2 className="font-heading text-2xl">學習者現況</h2>
-          <p className="mt-3 leading-7">{item.learners}</p>
-        </section>
-      </div>
-
-      <section className="mt-4 rounded-2xl bg-[#241c16] px-5 py-6 text-[#f6f1e7]">
-        <h2 className="font-heading text-2xl text-[#e7c9a4]">真實問題</h2>
-        <p className="mt-2 text-xl leading-8">{item.issue}</p>
-      </section>
-
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
-        {blocks.map((block) => (
-          <section key={block.key} className="rounded-2xl bg-white p-5 ring-1 ring-foreground/10">
-            <h2 className="font-heading text-2xl">{block.label}</h2>
-            <p className="mt-3 leading-7">{item[block.key]}</p>
-          </section>
+        {item.links.map((link) => (
+          <OutLink key={link.wishId} href={wishUrl(link.wishId)}>
+            {link.label}
+          </OutLink>
         ))}
       </div>
 
-      <section className="mt-8">
-        <h2 className="font-heading text-3xl">課怎麼走</h2>
-        <ol className="mt-4 space-y-3">
-          {item.arc.map((step, index) => (
-            <li key={step.title} className="grid gap-2 rounded-xl bg-white px-4 py-3 ring-1 ring-foreground/10 md:grid-cols-[140px_1fr]">
-              <p className="font-medium text-primary">
-                {index + 1}. {step.title}
-              </p>
-              <p className="leading-7">{step.detail}</p>
+      <section className="mt-8 rounded-2xl bg-white p-5 ring-1 ring-foreground/10 md:p-6">
+        <h2 className="font-heading text-3xl">已經對上的全球素養</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-7 text-muted-foreground">
+          依這份教案或簡報裡寫明、勾選的全球素養。沒有在檔案裡出現的項目，不放在這裡。
+        </p>
+        <ul className="mt-5 space-y-4">
+          {item.current.map((mark) => (
+            <li key={mark.slug} className="rounded-xl bg-[#fbf8f2] p-4">
+              <CompetencyChip slug={mark.slug} />
+              <p className="mt-3 leading-7">{mark.note}</p>
             </li>
           ))}
-        </ol>
+        </ul>
       </section>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-2">
-        <section className="rounded-2xl bg-white p-5 ring-1 ring-foreground/10">
-          <h2 className="font-heading text-2xl">看得到的證據</h2>
-          <p className="mt-3 leading-7">{item.evidence}</p>
-        </section>
-        <section className="rounded-2xl bg-white p-5 ring-1 ring-foreground/10">
-          <h2 className="font-heading text-2xl">最容易做歪</h2>
-          <p className="mt-3 leading-7">{item.pitfall}</p>
-          <p className="mt-3 text-sm leading-7 text-muted-foreground">下一次要改：{item.revision}</p>
-        </section>
-      </div>
+      <section className="mt-4 rounded-2xl bg-[#241c16] px-5 py-6 text-[#f6f1e7] md:px-6">
+        <h2 className="font-heading text-3xl text-[#e7c9a4]">下一步可以設計</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-7 text-[#f6f1e7]/75">
+          這是備課建議：課裡已經有這項素養的影子，檔案還沒把它設成主軸。不是課程發展委員會的決議，也不是教師已經勾選的結果。
+        </p>
+        <div className="mt-4">
+          <CompetencyChip slug={item.next.slug} />
+        </div>
+        <p className="mt-4 max-w-3xl text-lg leading-8">{item.next.note}</p>
+      </section>
 
-      <div className="mt-8">
-        <Link href={`/studio?from=${item.slug}`} className={buttonVariants({ size: "lg", className: "h-11 px-4" })}>
-          把這堂課放進設計工坊
+      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <Link href={`/exemplars/${previous.slug}`} className="text-sm hover:text-primary">
+          上一份：{previous.title}
+        </Link>
+        <Link href={`/studio?from=${item.slug}`} className={buttonVariants()}>
+          用這份的素養開一張備課稿
+        </Link>
+        <Link href={`/exemplars/${next.slug}`} className="text-sm hover:text-primary">
+          下一份：{next.title}
         </Link>
       </div>
     </div>

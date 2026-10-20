@@ -54,17 +54,13 @@ export function draftFromExemplar(slug: string) {
   if (!exemplar) return null
   return createDraft({
     title: exemplar.title,
-    grade: exemplar.grade,
+    grade: "hs",
     subject: exemplar.subjects,
-    issue: exemplar.issue,
-    learners: exemplar.learners,
-    competencies: exemplar.competencies,
-    partnerships: exemplar.partnerships,
-    environment: exemplar.environment,
-    pedagogy: exemplar.pedagogy,
-    digital: exemplar.digital,
-    evidence: exemplar.evidence,
-    revision: exemplar.revision,
+    issue: exemplar.summary,
+    learners: exemplar.people,
+    competencies: exemplar.current.map((mark) => mark.slug),
+    evidence: exemplar.current.map((mark) => mark.note).join("\n"),
+    revision: `下一步可以設計「${getCompetency(exemplar.next.slug)?.zh ?? ""}」：${exemplar.next.note}`,
   })
 }
 

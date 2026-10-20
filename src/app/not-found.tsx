@@ -14,7 +14,7 @@ export default function NotFound() {
           回首頁
         </Link>
         <Link href="/exemplars" className={buttonVariants({ variant: "outline" })}>
-          看課堂示例
+          看課程示例
         </Link>
       </div>
     </div>

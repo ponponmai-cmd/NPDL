@@ -44,7 +44,7 @@ export function InquiryWalk() {
           </div>
         </div>
         <p className="mt-4 text-sm leading-6 text-muted-foreground">
-          例子來自課堂示例「港邊的塑膠瓶要去哪裡」，用來走一遍探究，不是官方協議的原文。
+          例子來自花中教案「旅遊英文」。用來走一遍探究，不是把整份 Word 重貼一遍。
         </p>
         <div className="mt-6 flex gap-2">
           <Button type="button" variant="outline" disabled={index === 0} onClick={() => setIndex((value) => value - 1)}>

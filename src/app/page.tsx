@@ -148,7 +148,7 @@ export default function HomePage() {
         <p className="text-sm font-medium text-primary">深學工坊</p>
         <h2 className="mt-1 max-w-2xl font-heading text-3xl md:text-4xl">想自己寫一堂課，用設計工坊</h2>
         <p className="mt-4 max-w-2xl leading-8 text-muted-foreground">
-          工坊把六項素養和四個要素收成可以存、可以改的備課稿，只留在這台瀏覽器。裡面的課堂示例是工坊寫的練習，不是花中歷年檔案。
+          工坊把六項素養和四個要素收成可以存、可以改的備課稿，只留在這台瀏覽器。課程示例是花中已經放上資源板的教案，每一份都標了已經對上的全球素養，以及下一步可以設計的那一項。
         </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link href="/studio" className={buttonVariants({ size: "lg", className: "h-11 px-4" })}>
@@ -158,7 +158,7 @@ export default function HomePage() {
             href="/exemplars"
             className={buttonVariants({ variant: "outline", size: "lg", className: "h-11 px-4" })}
           >
-            看練習用的示例
+            看花中課程示例
           </Link>
         </div>
       </section>

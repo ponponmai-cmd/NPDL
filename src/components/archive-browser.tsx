@@ -1,8 +1,11 @@
 "use client"
 
 import { useMemo, useState, useSyncExternalStore } from "react"
+import Link from "next/link"
+import { CompetencyChip } from "@/components/competency-mark"
 import { OutLink } from "@/components/out-link"
 import { Input } from "@/components/ui/input"
+import { getExemplar } from "@/lib/exemplars"
 import {
   archiveItems,
   archiveYearHeading,
@@ -90,14 +93,37 @@ export function ArchiveBrowser() {
             <section key={group.id}>
               <h2 className="font-heading text-2xl">{archiveYearHeading(group.id)}</h2>
               <ul className="mt-4 grid gap-4 md:grid-cols-2">
-                {group.items.map((item) => (
+                {group.items.map((item) => {
+                  const exemplar = getExemplar(item.id)
+                  return (
                   <li key={item.id} className="flex h-full flex-col rounded-2xl bg-white p-5 ring-1 ring-foreground/10">
                     <p className="text-xs text-muted-foreground">
                       {item.yearLabel} · {item.kind}
                     </p>
                     <h3 className="mt-2 font-heading text-2xl">{item.title}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">{item.people}</p>
-                    <p className="mt-3 flex-1 leading-7">{item.summary}</p>
+                    <p className="mt-3 leading-7">{item.summary}</p>
+                    {exemplar ? (
+                      <div className="mt-4 space-y-3">
+                        <div>
+                          <p className="text-xs font-medium tracking-wide text-primary">已經對上</p>
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {exemplar.current.map((mark) => (
+                              <CompetencyChip key={mark.slug} slug={mark.slug} />
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-xs font-medium tracking-wide text-primary">下一步可以設計</p>
+                          <div className="mt-2">
+                            <CompetencyChip slug={exemplar.next.slug} />
+                          </div>
+                        </div>
+                        <Link href={`/exemplars/${exemplar.slug}`} className="inline-block text-sm underline decoration-foreground/30 underline-offset-4">
+                          看這份怎麼對上素養
+                        </Link>
+                      </div>
+                    ) : null}
                     <div className="mt-4 flex flex-wrap gap-2">
                       {item.links.map((link) => (
                         <OutLink key={link.wishId} href={wishUrl(link.wishId)}>
@@ -107,7 +133,8 @@ export function ArchiveBrowser() {
                       ))}
                     </div>
                   </li>
-                ))}
+                  )
+                })}
               </ul>
             </section>
           ))}

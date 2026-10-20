@@ -5,7 +5,6 @@ import { competencies, getCompetency } from "@/lib/competencies"
 import { schoolPhrases, surveyFor } from "@/lib/school"
 import { OutLink } from "@/components/out-link"
 import { exemplars } from "@/lib/exemplars"
-import { gradeLabel } from "@/lib/drafts"
 import { CompetencyMark } from "@/components/competency-mark"
 import { buttonVariants } from "@/components/ui/button"
 
@@ -35,7 +34,10 @@ export default async function CompetencyPage({ params }: PageProps) {
   const index = competencies.findIndex((competency) => competency.slug === item.slug)
   const previous = competencies[(index + competencies.length - 1) % competencies.length]
   const next = competencies[(index + 1) % competencies.length]
-  const related = exemplars.filter((exemplar) => exemplar.competencies.includes(item.slug))
+  const related = exemplars.filter(
+    (exemplar) =>
+      exemplar.current.some((mark) => mark.slug === item.slug) || exemplar.next.slug === item.slug,
+  )
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
@@ -136,22 +138,25 @@ export default async function CompetencyPage({ params }: PageProps) {
       </section>
 
       <section className="mt-10">
-        <h2 className="font-heading text-3xl">用這項素養當主軸的示例</h2>
+        <h2 className="font-heading text-3xl">花中教案裡和這項有關的課</h2>
         {related.length === 0 ? (
-          <p className="mt-3 text-muted-foreground">目前沒有示例把這項放在主軸。你可以在設計工坊自己寫。</p>
+          <p className="mt-3 text-muted-foreground">目前的花中教案還沒有把這項設成主軸或下一步。</p>
         ) : (
           <ul className="mt-4 grid gap-3 md:grid-cols-2">
-            {related.map((exemplar) => (
-              <li key={exemplar.slug}>
-                <Link href={`/exemplars/${exemplar.slug}`} className="block rounded-2xl bg-white p-4 ring-1 ring-foreground/10 hover:ring-primary/40">
-                  <p className="text-xs text-muted-foreground">
-                    {gradeLabel(exemplar.grade)} · {exemplar.subjects}
-                  </p>
-                  <p className="mt-1 font-heading text-xl">{exemplar.title}</p>
-                  <p className="mt-1 text-sm leading-6 text-muted-foreground">{exemplar.summary}</p>
-                </Link>
-              </li>
-            ))}
+            {related.map((exemplar) => {
+              const placed = exemplar.current.some((mark) => mark.slug === item.slug) ? "已經對上" : "下一步可以設計"
+              return (
+                <li key={exemplar.slug}>
+                  <Link href={`/exemplars/${exemplar.slug}`} className="block rounded-2xl bg-white p-4 ring-1 ring-foreground/10 hover:ring-primary/40">
+                    <p className="text-xs text-muted-foreground">
+                      {exemplar.yearLabel} · {placed}
+                    </p>
+                    <p className="mt-1 font-heading text-xl">{exemplar.title}</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{exemplar.summary}</p>
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         )}
       </section>

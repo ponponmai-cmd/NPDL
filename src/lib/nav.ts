@@ -10,7 +10,7 @@ export const primaryNav = [
 export const toolNav = [
   { href: "/design", label: "四個要素" },
   { href: "/inquiry", label: "協作探究" },
-  { href: "/exemplars", label: "課堂示例" },
+  { href: "/exemplars", label: "課程示例" },
   { href: "/start", label: "學校怎麼開始" },
   { href: "/studio", label: "設計工坊" },
 ] as const
